@@ -4,37 +4,39 @@ public class Main {
 	
 	public static void main(String[]args) throws InterruptedException, IOException {
 		Board game = new Board();
+		Player player = new Player();
+		Figure figure = new Figure();
+		Rules rules = new Rules();
 		
 		System.out.println("Welcome in Tic Tac Toe game!");
-		game.clrscr();
-		game.createBoard();  // 1raz
-		game.setPlayerFigure(); // 1raz
+		Figure.clrscr();
+		game.createBoard(3,3);  // one time create
+		player.setPlayerFigure(); // one time choose
 		
-		while (game.gameover == false) {
+		while (Board.gameover == false) {
 		// we have turn 
 		game.printRound();
-		game.drawFigure();
+		figure.drawFigure("player1");
 		game.printBoard();
 		Thread.sleep(1500);
-		game.winningConditions();
-		game.lookWin();
-		game.lookDraw();
-		if (game.gameover == true)
+		rules.winningConditions();
+		rules.lookWin();
+		rules.lookDraw();
+		if (Board.gameover == true)
 			break;
 		System.out.println();
 		// bot turn
-		game.botDrawFigure();
+		figure.drawFigure("player2");
 		game.printBoard();
 		Thread.sleep(1500);
-		game.winningConditions();
-		game.lookWin();
-		game.lookDraw();
-		if (game.gameover == true)
+		rules.winningConditions();
+		rules.lookWin();
+		rules.lookDraw();
+		if (Board.gameover == true)
 			break;
-		
 		}
 		
-		game.printScore();
+		player.printScore();
 		System.out.println("End game");
 	}
 }
